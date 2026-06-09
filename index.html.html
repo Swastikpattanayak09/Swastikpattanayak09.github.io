@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swastik Resort | Premium Luxury Stay & Wedding Mandap</title>
+    <style>
+        /* --- VISUAL THEME & DESIGN SYSTEM --- */
+        :root {
+            --primary-blue: #0b4c8c;
+            --accent-red: #d61f27;
+            --gold-glow: #f59e0b;
+            --dark-bg: #05070a;
+            --panel-bg: #0f1622;
+            --border-line: rgba(255, 255, 255, 0.08);
+            --text-white: #ffffff;
+            --text-muted: #94a3b8;
+            --transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- PRETTY SMOOTH SCROLLBAR --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 4px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1350px;
+            margin: 0 auto;
+        }
+
+        /* --- FIXED NAVIGATION BAR --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(5, 7, 10, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-line);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-area img {
+            height: 44px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-white);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-glow);
+        }
+
+        /* --- EYE-CATCHING BUTTONS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), #1e40af);
+            color: var(--text-white);
+            box-shadow: 0 4px 20px rgba(11, 76, 140, 0.4);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(11, 76, 140, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-white);
+            border: 2px solid var(--gold-glow);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            background: var(--gold-glow);
+            color: #000;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        /* --- WATERMARK REMOVAL & IMAGE DECORATION SYSTEM --- */
+        .decorated-image-frame {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.6);
+            background: #000;
+        }
+
+        .watermark-mask {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .watermark-mask img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transform: scale(1.04);
+            transform-origin: top left;
+            transition: var(--transition);
+        }
+
+        .decorated-image-frame:hover .watermark-mask img {
+            transform: scale(1.08);
+        }
+
+        .decorated-image-frame::after {
+            content: '';
+            position: absolute;
+            inset: 12px;
+            border: 1px solid var(--gold-glow);
+            border-radius: 10px;
+            pointer-events: none;
+            opacity: 0.4;
+            transition: var(--transition);
+            z-index: 2;
+        }
+
+        .decorated-image-frame:hover::after {
+            opacity: 0.8;
+            inset: 8px;
+        }
+
+        /* --- FIRST PAGE: IMMERSIVE RESORT HIGHLIGHT --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(180deg, rgba(5,7,10,0.6) 0%, var(--dark-bg) 100%);
+            padding-top: 80px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4.5rem;
+            align-items: center;
+            height: 100%;
+        }
+
+        .hero-content {
+            z-index: 5;
+        }
+
+        .hero-tag {
+            color: var(--gold-glow);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.15;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            max-width: 580px;
+        }
+
+        .hero-image-side {
+            height: 75vh;
+        }
+
+        .hero-image-side .decorated-image-frame {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* --- MODULAR FACILITIES MATRIX --- */
+        .facilities-matrix {
+            padding: 7rem 0;
+            background: #090d15;
+            border-top: 1px solid var(--border-line);
+            border-bottom: 1px solid var(--border-line);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .section-header p {
+            color: var(--gold-glow);
+            font-weight: 600;
+            margin-top: 0.4rem;
+            letter-spacing: 1px;
+        }
+
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .matrix-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-line);
+            border-radius: 12px;
+            padding: 3.5rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .matrix-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 15px 30px rgba(11, 76, 140, 0.25);
+        }
+
+        .matrix-floor {
+            color: var(--accent-red);
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.6rem;
+        }
+
+        .matrix-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .matrix-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- PROFILE VIEW BLOCK ROWS --- */
+        .showcase-row {
+            padding: 8rem 0;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 5.5rem;
+            align-items: center;
+        }
+
+        .showcase-row:nth-child(even) .showcase-grid {
+            grid-template-columns: 0.85fr 1.15fr;
+        }
+
+        .showcase-row:nth-child(even) .showcase-media-panel {
+            order: 2;
+        }
+
+        .showcase-media-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .showcase-sub-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .sub-img-box {
+            height: 180px;
+        }
+
+        .showcase-content h3 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .showcase-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2.2rem;
+            line-height: 1.75;
+        }
+
+        .pretty-bullets {
+            list-style: none;
+        }
+
+        .pretty-bullets li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .pretty-bullets li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--gold-glow);
+            font-size: 1.2rem;
+            top: -2px;
+        }
+
+        /* --- INTEGRATED BOOKING GATEWAY --- */
+        .booking-gateway {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .gateway-card {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--panel-bg);
+            border: 2px solid var(--primary-blue);
+            padding: 4.5rem 2rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 45px rgba(11, 76, 140, 0.2);
+        }
+
+        .gateway-card h3 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .gateway-card p {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 1.15rem;
+        }
+
+        /* --- CONTACT INFORMATION HUB --- */
+        .info-hub {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border-line);
+        }
+
+        .hub-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .info-cards-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .info-node {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-line);
+            padding: 2.2rem;
+            border-radius: 12px;
+        }
+
+        .info-node h4 {
+            color: var(--gold-glow);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.6rem;
+        }
+
+        .info-node p {
+            font-size: 1.05rem;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .hub-image-side {
+            height: 420px;
+        }
+
+        .hub-image-side .decorated-image-frame {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* --- SYSTEM FOOTER --- */
+        footer {
+            background: #030406;
+            padding: 5rem 0 2.5rem 0;
+            border-top: 2px solid var(--primary-blue);
+            font-size: 0.95rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr 0.8fr;
+            gap: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--border-line);
+        }
+
+        .footer-about p {
+            color: var(--text-muted);
+            margin-top: 1.2rem;
+            max-width: 420px;
+        }
+
+        .footer-links h4, .footer-legal h4 {
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-glow);
+        }
+
+        .gst-display-box {
+            background: #090d16;
+            border: 1px solid var(--primary-blue);
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            color: #e2e8f0;
+            font-family: monospace;
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* --- RESPONSIVE SCALING LAYOUTS --- */
+        @media (max-width: 1150px) {
+            .hero {
+                height: auto;
+                padding-top: 140px;
+            }
+            .hero-grid, .showcase-grid, .hub-grid {
+                grid-template-columns: 1fr !important;
+                gap: 4rem;
+            }
+            .hero-image-side {
+                height: 50vh;
+            }
+            .showcase-row:nth-child(even) .showcase-media-panel {
+                order: 0;
+            }
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .info-cards-box {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.2rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo-area">
+                <img src="Swastik Resort Logo.jpg" alt="Swastik Resort Logo">
+                <span class="logo-text">SWASTIK RESORT</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#matrix">Accommodations</a></li>
+                <li><a href="#ground">Restaurant</a></li>
+                <li><a href="#second">Lodge Rooms</a></li>
+                <li><a href="#open-space">Event Grounds</a></li>
+                <li><a href="https://forms.gle/VaG7qZ5Rw6VMNjM8A" target="_blank" class="btn btn-primary" style="padding: 0.5rem 1.6rem;">Book Now</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="hero-tag">Welcome to Paradise</span>
+                <h1>Discover Ultimate Luxury & Comfort</h1>
+                <p>Welcome to Ganjam's most beautiful and modern luxury resort complex. Experience exceptional family dining spaces, premium hotel lodging suites, a grand wedding mandap, and breathtaking outdoor lawns planned to perfection under one stunning location.</p>
+                <div class="btn-group" style="display: flex; gap: 1.2rem; flex-wrap: wrap;">
+                    <a href="https://forms.gle/VaG7qZ5Rw6VMNjM8A" target="_blank" class="btn btn-primary">Book Online Instantly</a>
+                    <a href="https://maps.app.goo.gl/dh1QMxkYm1EpcKaR6?g_st=ac" target="_blank" class="btn btn-secondary">Get Directions</a>
+                </div>
+            </div>
+            <div class="hero-image-side">
+                <div class="decorated-image-frame">
+                    <div class="watermark-mask">
+                        <img src="Swastik Resort 5.jpg" alt="Swastik Resort Grand Exterior View">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="matrix" class="facilities-matrix">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Premium Accommodations</h2>
+                <p>Meticulously structured zones for dining, staying, and grand milestones</p>
+            </div>
+            <div class="matrix-grid">
+                <div class="matrix-card">
+                    <div class="matrix-floor">Ground Floor</div>
+                    <h3>Family Restaurant</h3>
+                    <p>Delicious food served inside a gorgeous dining hall featuring premium layouts and comfort styling.</p>
+                </div>
+                <div class="matrix-card">
+                    <div class="matrix-floor">1st Floor</div>
+                    <h3>Shubh Mandap</h3>
+                    <p>A grand, spacious celebration hall designed flawlessly to cater to marriages, parties, and landmark events.</p>
+                </div>
+                <div class="matrix-card">
+                    <div class="matrix-floor">2nd Floor</div>
+                    <h3>Luxury Lodge</h3>
+                    <p>Cozy executive stay suites fully upgraded with eye-catching fluted timber feature walls and linens.</p>
+                </div>
+                <div class="matrix-card">
+                    <div class="matrix-floor">Open Yard</div>
+                    <h3>Event Lawns</h3>
+                    <p>Massive open grounds framed elegantly alongside a signature triple-cascade water fountain display.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="details-container">
+        
+        <section id="ground" class="showcase-row">
+            <div class="container showcase-grid">
+                <div class="showcase-media-panel">
+                    <div class="decorated-image-frame" style="height: 400px;">
+                        <div class="watermark-mask">
+                            <img src="Swastik Resort 7.jpg" alt="Swastik Resort Luxury Dining Space">
+                        </div>
+                    </div>
+                    <div class="showcase-sub-gallery">
+                        <div class="decorated-image-frame sub-img-box">
+                            <div class="watermark-mask">
+                                <img src="Swastik Resort 11.jpg" alt="Swastik Resort Buffet Presentation">
+                            </div>
+                        </div>
+                        <div class="decorated-image-frame sub-img-box">
+                            <div class="watermark-mask">
+                                <img src="Swastik Resort 4.jpg" alt="Swastik Resort Side Perspective Layout">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-content">
+                    <span class="hero-tag" style="color: var(--primary-blue);">Ground Level • Dining Lounge</span>
+                    <h3>Delicious Food & Gorgeous Ambiance</h3>
+                    <p>Treat your family to an elite dining experience. Our ground level features custom-made rich teal emerald upholstery, beautiful classic geometric floor tiles, large food display counters, and hidden warm glowing ceiling lights that make every meal feel special.</p>
+                    <ul class="pretty-bullets">
+                        <li>Premium high-capacity buffet presentation counters</li>
+                        <li>Fully air-conditioned, beautifully decorated interior seating layouts</li>
+                        <li>The ideal venue for birthday parties and close family gatherings</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="second" class="showcase-row">
+            <div class="container showcase-grid">
+                <div class="showcase-content">
+                    <span class="hero-tag" style="color: var(--primary-blue);">Level 02 • Executive Suites</span>
+                    <h3>Cozy Luxury Living Spaces</h3>
+                    <p>Relax completely inside our beautifully designed lodging suites. Crafted with ultimate comfort in mind, every room features premium fluted wood accent walls, modern workspace desks, soft natural drapes, and gentle side lights to create a perfectly restful setting.</p>
+                    <ul class="pretty-bullets">
+                        <li>Available in Premium Double Beds and Twin Bed suite arrangements</li>
+                        <li>Upgraded with minimalist contemporary wall art and decorations</li>
+                        <li>Centralized climate control with clean attached luxury bathrooms</li>
+                    </ul>
+                </div>
+                <div class="showcase-media-panel">
+                    <div class="decorated-image-frame" style="height: 400px;">
+                        <div class="watermark-mask">
+                            <img src="Swastik Resort 9.jpg" alt="Swastik Resort Master Bedroom Suite">
+                        </div>
+                    </div>
+                    <div class="showcase-sub-gallery">
+                        <div class="decorated-image-frame sub-img-box">
+                            <div class="watermark-mask">
+                                <img src="Swastik Resort 10.jpg" alt="Swastik Resort Twin Luxury Bed Setup">
+                            </div>
+                        </div>
+                        <div class="decorated-image-frame sub-img-box">
+                            <div class="watermark-mask">
+                                <img src="Swastik Resort 8.jpg" alt="Swastik Resort Double Bedroom Configuration">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="open-space" class="showcase-row">
+            <div class="container showcase-grid">
+                <div class="showcase-media-panel">
+                    <div class="decorated-image-frame" style="height: 460px;">
+                        <div class="watermark-mask">
+                            <img src="Swastik Resort 6.jpg" alt="Swastik Resort Waterfall Entrance Yard">
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-content">
+                    <span class="hero-tag" style="color: var(--primary-blue);">Outer Zone • Celebrations</span>
+                    <h3>Stunning Open-Air Event Lawns</h3>
+                    <p>Host spectacular, unforgettable celebrations on our massive outdoor courtyard grounds. The main entrance area is highlighted by a grand, eye-catching triple-cascade fountain monument that glows brilliantly at night, offering the ultimate background for perfect photos.</p>
+                    <ul class="pretty-bullets">
+                        <li>Magnificent brightly-lit signature entry landmark backdrop</li>
+                        <li>Clean interlocking paved walkways surrounded by beautiful landscaping</li>
+                        <li>Direct access links inside the main first-floor wedding Mandap hall</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <section class="booking-gateway">
+        <div class="container">
+            <div class="gateway-card">
+                <h3>Ready to Plan Your Event or Stay?</h3>
+                <p>Click the link below to launch our official online booking portal powered by Google Forms. Instantly check room availability, book corporate banquets, or reserve restaurant dining tables.</p>
+                <a href="https://forms.gle/VaG7qZ5Rw6VMNjM8A" target="_blank" class="btn btn-primary">Open Official Booking Form</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-hub container">
+        <div class="hub-grid">
+            <div class="info-cards-box">
+                <div class="info-node">
+                    <h4>Resort Address</h4>
+                    <p>PLOT NO. 12148/15763 & 12149/15764,<br>Gudiali Chhak, Near Biju Pattnaik Statue,<br>Kavisurjyanagar, Ganjam, Odisha, 761104</p>
+                </div>
+                <div class="info-node">
+                    <h4>Active Voice Line</h4>
+                    <p><a href="tel:7788809097" style="color: var(--text-white); text-decoration: none; font-weight: 800;">+91 7788809097</a></p>
+                </div>
+                <div class="info-node">
+                    <h4>Google Maps Link</h4>
+                    <p><a href="https://maps.app.goo.gl/dh1QMxkYm1EpcKaR6?g_st=ac" target="_blank" style="color: var(--gold-glow); text-decoration: none; font-weight: bold;">Launch Navigation App</a></p>
+                </div>
+                <div class="info-node">
+                    <h4>Email Channel</h4>
+                    <p>swastikresorts07@gmail.com</p>
+                </div>
+            </div>
+            <div class="hub-image-side">
+                <div class="decorated-image-frame">
+                    <div class="watermark-mask">
+                        <img src="Swastik Resort 4.jpg" alt="Swastik Resort Architectural Perspective Design Close-Up">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <span class="logo-text" style="font-size: 1.4rem;">SWASTIK RESORT</span>
+                <p>Ganjam's premium multi-story property offering elite family dining, cozy hotel lodging, spacious marriage banquets, and beautiful outdoor lawn landscapes.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Navigation</h4>
+                <ul>
+                    <li><a href="#ground">Family Restaurant</a></li>
+                    <li><a href="#matrix">Wedding Mandap</a></li>
+                    <li><a href="#second">Cozy Lodge Rooms</a></li>
+                    <li><a href="#open-space">Beautiful Event Lawn</a></li>
+                </ul>
+            </div>
+            <div class="footer-legal">
+                <h4>Registry Matrix</h4>
+                <span style="color: var(--text-muted); font-size: 0.8rem;">Official State Business GSTIN:</span><br>
+                <div class="gst-display-box">21HABPS0084J1ZQ</div>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>© 2026 Swastik Resort. All rights reserved.</p>
+            <p>Welcome to a world of absolute comfort.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
